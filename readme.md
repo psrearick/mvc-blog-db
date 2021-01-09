@@ -21,3 +21,11 @@ encapsulates relevant code
 ### Autoloading and Namespacing 
 
 Utilizes namespaces as outlined in the PSR-4 standard. PSR-4 autoloading enables us to easily use namespaces to separate internal package files from those of dependencies that may be installed in the future as well as future internal functionality that may share class names.
+
+### Routing
+
+I set up routing based on url parameters to make it easy to add new routes. Each route can be configured to allow for a callback so that they can be processed differently.
+
+### Data
+
+To avoid configuring a database, demo data is stored in the runtime directory.
