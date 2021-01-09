@@ -6,11 +6,13 @@ use app\src\Application;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$app = new Application();
+$dir = dirname(__DIR__);
 
-$app->router->get('/', function(){
-    return 'Hello';
-});
+$app = new Application($dir);
+
+$app->router->get('/', 'home');
+
+$app->router->get('/create-post', 'create-post');
 
 $app->run();
 

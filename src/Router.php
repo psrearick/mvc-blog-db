@@ -9,11 +9,18 @@ namespace app\src;
 class Router
 {
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    /**
+     * Router constructor.
+     * @param Request $request
+     * @param Response $response
+     */
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
 
     /**
@@ -35,9 +42,42 @@ class Router
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
         if ($callback === false) {
-            echo "Not found";
-            exit;
+            $this->response->setStatusCode(404);
+            return "Not found";
         }
-        echo call_user_func($callback);
+
+        if (is_string($callback)){
+            return $this->render($callback);
+        }
+
+        return call_user_func($callback);
+    }
+
+    /**
+     * @param $view
+     */
+    public function render($view)
+    {
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->renderView($view);
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+
+    /**
+     * @return false|string
+     * cache and return current layout
+     */
+    protected function layoutContent()
+    {
+        ob_start();
+        include_once Application::$ROOT . "/views/layouts/main.php";
+        return ob_get_clean();
+    }
+
+    protected function renderView($view)
+    {
+        ob_start();
+        include_once Application::$ROOT . "/views/$view.php";
+        return ob_get_clean();
     }
 }
