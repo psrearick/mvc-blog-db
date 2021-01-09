@@ -1,0 +1,15 @@
+{
+    "name": "philliprearick/cms",
+    "authors": [
+        {
+            "name": "philliprearick",
+            "email": "psrearick@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
