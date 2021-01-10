@@ -30,3 +30,8 @@ The post data is sanitized in the `Request` class in case invalid characters are
 I made the fields of each model as properties. That way we can set all the properties at once (using `loadData`). This makes setting the data really convenient.
 
 All the models extend from a base model which can set the properties and validate them.
+
+## Session Handling
+
+
+## Validation

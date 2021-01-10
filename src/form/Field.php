@@ -41,7 +41,7 @@ class Field
                     <div class="invalid-feedback">%s</div>
                 </div>
             ',
-                $this->attribute,
+                $this->model->getLabel($this->attribute),
                 $this->attribute,
                 $this->model->hasError($this->attribute) ? ' is-invalid' : '',
                 $this->model->{$this->attribute},
@@ -56,7 +56,7 @@ class Field
                 <div class="invalid-feedback">%s</div>
             </div>
         ',
-            $this->attribute,
+            $this->model->getLabel($this->attribute),
             $this->type,
             $this->attribute,
             $this->model->{$this->attribute},
