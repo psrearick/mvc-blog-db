@@ -29,6 +29,7 @@ use app\src\Application;
         <li><a href="/login">Login</a></li>
         <li><a href="/register">Register</a></li>
         <?php else: ?>
+            <a href="/profile">Profile</a>
             <li>Logged in as <?php echo Application::$app->user->getDisplayName() ?>  <a href="/logout">(Logout)</a> </li>
         <?php endif ?>
     </ul>

@@ -31,7 +31,14 @@ I made the fields of each model as properties. That way we can set all the prope
 
 All the models extend from a base model which can set the properties and validate them.
 
-## Session Handling
+### Session Handling
 
 
-## Validation
+### Validation
+
+
+### Protected Routes
+
+Only autenticated users can access certain pages, such as the Create Post page.
+
+### Middleware

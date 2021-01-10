@@ -11,13 +11,15 @@ use app\models\User;
 class Application
 {
     public static string $ROOT;
+
+    public string $layout = 'main';
     public Router $router;
     public Request $request;
     public Response $response;
     public Session $session;
     public ?DbModel $user = null;
     public static Application $app;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public User $userClass;
 
     public function __construct($root, array $conf)
@@ -48,7 +50,14 @@ class Application
      */
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->response->setStatusCode($e->getCode());
+            echo $this->router->render('_error', [
+                'exception' => $e
+            ]);
+        }
     }
 
     /**
