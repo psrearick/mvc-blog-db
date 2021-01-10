@@ -1,4 +1,5 @@
 <?php
+use app\src\Application;
 ?>
 
 <div>
@@ -12,6 +13,13 @@
 
 
 <div>
+    <div>
+        <?php if (Application::$app->session->getMessage('success')): ?>
+            <div>
+               <?php echo Application::$app->session->getMessage('success') ?>
+            </div>
+        <?php endif; ?>
+    </div>
     {{content}}
 </div>
 
