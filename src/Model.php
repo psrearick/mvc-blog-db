@@ -58,24 +58,24 @@ abstract class Model
                 }
 
                 if ($ruleName === self::RULE_REQ && !$value) {
-                    $this->addError($attr, self::RULE_REQ);
+                    $this->addErrorForRule($attr, self::RULE_REQ);
                 }
 
                 if ($ruleName === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                    $this->addError($attr, self::RULE_EMAIL);
+                    $this->addErrorForRule($attr, self::RULE_EMAIL);
                 }
 
                 if ($ruleName === self::RULE_MIN && strlen($value) < $rule['min']) {
-                    $this->addError($attr, self::RULE_MIN, $rule);
+                    $this->addErrorForRule($attr, self::RULE_MIN, $rule);
                 }
 
                 if ($ruleName === self::RULE_MAX && strlen($value) > $rule['max']) {
-                    $this->addError($attr, self::RULE_MAX, $rule);
+                    $this->addErrorForRule($attr, self::RULE_MAX, $rule);
                 }
 
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $rule['match'] = $this->getLabel($rule['match']);
-                    $this->addError($attr, self::RULE_MATCH, $rule);
+                    $this->addErrorForRule($attr, self::RULE_MATCH, $rule);
                 }
 
                 if ($ruleName === self::RULE_UNIQUE) {
@@ -84,14 +84,14 @@ abstract class Model
                     $table = $class::tableName();
                     $statement = "SELECT * FROM $table WHERE $uniqueAttr = :attr";
 
-                    // prepare statement and bind attribute to value
-                    // execute statement
-                    // fetch results and sets to variable $record
-                    // if results exists, throw an error
+                    // TODO: prepare statement and bind attribute to value
+                    //      execute statement
+                    //      fetch results and sets to variable $record
+                    //      if results exists, throw an error
 
-                    $record = null; // demo value
+                    $record = null; // demo value, TODO: Get this value from query result
                     if ($record) {
-                        $this->addError($attr, self::RULE_UNIQUE, ['field' => $this->getLabel($attr)]);
+                        $this->addErrorForRule($attr, self::RULE_UNIQUE, ['field' => $this->getLabel($attr)]);
                     }
                 }
             }
@@ -104,12 +104,16 @@ abstract class Model
      * @param string $rule
      * @param array $params
      */
-    public function addError(string $attr, string $rule, $params = [])
+    private function addErrorForRule(string $attr, string $rule, $params = [])
     {
         $msg = $this->errorMessages()[$rule] ?? '';
         foreach ($params as $key => $value) {
             $msg = str_replace("{{$key}}", $value, $msg);
         }
+        $this->errors[$attr][] = $msg;
+    }
+
+    public function addError(string $attr, string $msg) {
         $this->errors[$attr][] = $msg;
     }
 
@@ -131,7 +135,7 @@ abstract class Model
         return $this->errors[$attr] ?? false;
     }
 
-    public function getfirstError($attr)
+    public function getFirstError($attr)
     {
         return $this->errors[$attr][0] ?? false;
     }

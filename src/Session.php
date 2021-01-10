@@ -19,6 +19,10 @@ class Session
         $_SESSION[self::MESSAGE_KEY] = $messages;
     }
 
+    /**
+     * @param $key
+     * @param $message
+     */
     public function setMessage($key, $message)
     {
         $_SESSION[self::MESSAGE_KEY][$key] = [
@@ -27,11 +31,45 @@ class Session
         ];
     }
 
+    /**
+     * @param $key
+     * @return false|mixed
+     */
     public function getMessage($key)
     {
         return $_SESSION[self::MESSAGE_KEY][$key]['value'] ?? false;
     }
 
+    /**
+     * Set a value in the session
+     *
+     * @param string $key
+     * @param $value
+     */
+    public function set(string $key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
+
+    /**
+     * Get a value from the session
+     *
+     * @param string $key
+     * @return false|mixed
+     */
+    public function get(string $key)
+    {
+        return $_SESSION[$key] ?? false;
+    }
+
+    public function remove($key)
+    {
+        unset($_SESSION[$key]);
+    }
+
+    /**
+     * Clear out session
+     */
     public function __destruct()
     {
         $messages = $_SESSION[self::MESSAGE_KEY] ?? [];

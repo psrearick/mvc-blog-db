@@ -45,7 +45,7 @@ class Field
                 $this->attribute,
                 $this->model->hasError($this->attribute) ? ' is-invalid' : '',
                 $this->model->{$this->attribute},
-                $this->model->getfirstError($this->attribute)
+                $this->model->getFirstError($this->attribute)
             );
         }
 
@@ -61,7 +61,7 @@ class Field
             $this->attribute,
             $this->model->{$this->attribute},
             $this->model->hasError($this->attribute) ? ' is-invalid' : '',
-            $this->model->getfirstError($this->attribute)
+            $this->model->getFirstError($this->attribute)
         );
     }
 

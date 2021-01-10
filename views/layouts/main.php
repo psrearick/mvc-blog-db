@@ -6,8 +6,6 @@ use app\src\Application;
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/create-post">Create Post</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
     </ul>
 </div>
 
@@ -23,3 +21,15 @@ use app\src\Application;
     {{content}}
 </div>
 
+<div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/create-post">Create Post</a></li>
+        <?php if (Application::isGuest()): ?>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+        <?php else: ?>
+            <li>Logged in as <?php echo Application::$app->user->getDisplayName() ?>  <a href="/logout">(Logout)</a> </li>
+        <?php endif ?>
+    </ul>
+</div>

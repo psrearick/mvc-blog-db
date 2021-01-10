@@ -4,24 +4,30 @@
 namespace app\models;
 
 
-use app\src\DbModel;
 use app\src\Model;
+use app\src\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
 
+    public ?int $id = null;
     public ?string $name = null;
     public ?string $email = null;
     public int $status = self::STATUS_INACTIVE;
     public ?string $password = null;
     public ?string $passwordConfirmation = null;
 
-    public function tableName(): string
+    public function table(): string
     {
         return 'users';
+    }
+
+    public function primaryKey(): string
+    {
+        return 'id';
     }
 
     public function save()
@@ -54,5 +60,10 @@ class User extends DbModel
             'password' => 'Password',
             'passwordConfirmation' => 'Confirm Password'
         ];
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->name;
     }
 }

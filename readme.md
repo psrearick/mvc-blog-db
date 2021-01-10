@@ -15,7 +15,7 @@ I set up routing based on url parameters to make it easy to add new routes. Each
 
 ### Data
 
-To avoid configuring a database, demo data is stored in the `runtime` directory.
+To avoid configuring a database, demo data is stored in the `runtime` directory. The database queries are partially constructed, then `TODOS` are written to explain roughly how the query would be run on the database and would should be returned.
 
 ### Views
 
