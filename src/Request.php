@@ -6,42 +6,112 @@ namespace app\src;
 
 class Request
 {
-    public function getPath()
+    protected string $base_path = '';
+    protected string $path = '';
+    protected string $method = '';
+    protected array $http_methods = array('get', 'post', 'put', 'patch', 'delete');
+
+    public function __construct($base_path = '')
+    {
+        $this->base_path = $base_path;
+        $this->path = $this->path();
+        $this->method = $this->method();
+    }
+
+    /**
+     * base_path getter
+     *
+     * @return string
+     */
+    public function getBasePath(): string
+    {
+        return $this->base_path;
+    }
+
+    /**
+     * Get request URI and set the path to everything before the question mark,
+     * or first slash, removing training slashes
+     *
+     * @return string
+     */
+    public function path(): string
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $pos = strpos($path, '?');
-        if ($pos === false) {
-            return $path;
+        if ($pos) {
+            $path = substr($path, 0, $pos);
         }
-        return substr($path, 0, $pos);
+        return rtrim($path, '/');
     }
 
-    public function method()
+    /**
+     * path getter
+     *
+     * @return string
+     */
+    public function getPath(): string
     {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+        return $this->path;
     }
 
-    public function isGet()
+    /**
+     * Get the request method, defaulting to GET
+     *
+     * @return string
+     */
+    public function method(): string
     {
-        return $this->method() === 'get';
+        $method = strtolower($_SERVER['REQUEST_METHOD']);
+
+        if (in_array($method, $this->http_methods)) {
+            return $method;
+        }
+
+        return 'get';
     }
 
-    public function isPost()
+    /**
+     * method getter
+     *
+     * @return string
+     */
+    public function getMethod(): string
     {
-        return $this->method() === 'post';
+        return $this->method;
     }
 
-    public function getBodyData()
+    /**
+     * @return bool
+     */
+    public function isGet(): bool
+    {
+        return $this->method === 'get';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPost(): bool
+    {
+        return $this->method === 'post';
+    }
+
+    /**
+     * Get input values from request
+     *
+     * @return array
+     */
+    public function getBodyData(): array
     {
         $body = [];
 
-        if ($this->method() === 'get') {
+        if ($this->isGet()) {
             foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
 
-        if ($this->method() === 'post') {
+        if ($this->isPost()) {
             foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
