@@ -7,8 +7,11 @@ use app\src\Application;
 use app\src\Controller;
 use app\src\Request;
 
-class SiteController extends Controller
+class BlogController extends Controller
 {
+    /**
+     * @return string|string[]
+     */
     public function showPosts()
     {
         $params = [
@@ -16,6 +19,10 @@ class SiteController extends Controller
         return $this->render('home', $params);
     }
 
+    /**
+     * @param Request $request
+     * @return string|string[]
+     */
     public function createPost(Request $request)
     {
         $create = new CreatePostForm();
@@ -29,10 +36,5 @@ class SiteController extends Controller
         return $this->render('create-post', [
             'model' => $create
         ]);
-    }
-
-    public static function handleCreatePost(Request $request)
-    {
-        $request = $request->getBodyData();
     }
 }

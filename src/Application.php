@@ -80,8 +80,9 @@ class Application
 
     /**
      * @param UserModel $user
+     * @return bool
      */
-    public function login(UserModel $user)
+    public function login(UserModel $user): bool
     {
         $this->user = $user;
         $key = $user->primaryKey();

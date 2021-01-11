@@ -42,3 +42,7 @@ All the models extend from a base model which can set the properties and validat
 Only autenticated users can access certain pages, such as the Create Post page.
 
 ### Middleware
+
+### Authentication
+
+For demo purposes, in `public/index.php`, within the `config` array, the value for `start_logged_in` determines if a user is logged in by default or not. If this is set to `true`, you will not be able to log out, but will not need to log in. If it is set to `false`, you will need to log in. When you do, any valid values will log in the same demo user.

@@ -40,7 +40,7 @@ abstract class DbModel extends Model
     {
         $table = static::table();
         $data = call_user_func([new DemoData, $table]);
-        $this->loadData($data);
+        $this->loadData($data[0]);
         return $this;
 
 //        $attrs = array_keys($cond);

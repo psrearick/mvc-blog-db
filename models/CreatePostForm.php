@@ -21,6 +21,8 @@ class CreatePostForm extends DbModel
         return [
             'postTitle' => [self::RULE_REQ],
             'body' => [self::RULE_REQ],
+            'excerpt' => [self::RULE_REQ],
+            'user_id' => [self::RULE_REQ],
         ];
     }
 
@@ -30,7 +32,10 @@ class CreatePostForm extends DbModel
             'postTitle' => 'Title',
             'body' => 'Body',
             'tags' => 'Tags',
-            'image_url' => 'Image URL'
+            'image_url' => 'Image URL',
+            'excerpt' => 'Excerpt',
+            'user_id' => 'User',
+            'category_ids' => 'Category'
         ];
     }
 
@@ -41,7 +46,7 @@ class CreatePostForm extends DbModel
 
     public function attributes(): array
     {
-        return ['postTitle', 'body', 'tags', 'image_url'];
+        return ['postTitle', 'body', 'tags', 'image_url', 'excerpt', 'user_id', 'category'];
     }
 
     public function primaryKey(): string
