@@ -19,7 +19,7 @@ $app = new Application($dir, $config);
 
 $app->router->get('/', [SiteController::class, 'showPosts']);
 $app->router->get('/create-post', [SiteController::class, 'createPost']);
-$app->router->post('/create-post', [SiteController::class, 'handleCreatePost']);
+$app->router->post('/create-post', [SiteController::class, 'createPost']);
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);

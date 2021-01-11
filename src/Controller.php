@@ -26,7 +26,7 @@ class Controller
 
     public function render($view, $params = [])
     {
-        return Application::$app->router->render($view, $params);
+        return Application::$app->view->render($view, $params);
     }
 
     public function registerMiddleware(Middleware $middleware)

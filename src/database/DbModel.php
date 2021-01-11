@@ -1,10 +1,11 @@
 <?php
 
 
-namespace app\src;
+namespace app\src\database;
 
 
 use app\runtime\DemoData;
+use app\src\Model;
 
 abstract class DbModel extends Model
 {

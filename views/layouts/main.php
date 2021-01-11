@@ -2,6 +2,15 @@
 use app\src\Application;
 ?>
 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?php echo $this->title ?></title>
+</head>
+
 <div>
     <ul>
         <li><a href="/">Home</a></li>
@@ -34,3 +43,4 @@ use app\src\Application;
         <?php endif ?>
     </ul>
 </div>
+</html>

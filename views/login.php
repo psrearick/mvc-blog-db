@@ -2,6 +2,8 @@
 /** @var $model \app\models\User */
 
 use app\src\form\Form;
+
+$this->title = "Log in";
 ?>
 
 <div>

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\CreatePostForm;
 use app\src\Application;
 use app\src\Controller;
 use app\src\Request;
@@ -15,18 +16,23 @@ class SiteController extends Controller
         return $this->render('home', $params);
     }
 
-    public function createPost()
+    public function createPost(Request $request)
     {
-        return $this->render('create-post');
+        $create = new CreatePostForm();
+        if ($request->isPost()) {
+            $create->loadData($request->getBodyData());
+            if ($create->validate() && $create->save()) {
+                Application::$app->session->setMessage('success', 'Blog post created');
+                return $response->redirect("/post/$create->{$create->primaryKey()}");
+            }
+        }
+        return $this->render('create-post', [
+            'model' => $create
+        ]);
     }
 
     public static function handleCreatePost(Request $request)
     {
         $request = $request->getBodyData();
-        echo '<pre>';
-        var_dump($request);
-        echo '</pre>';
-        exit();
-        return 'creating post';
     }
 }
