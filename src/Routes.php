@@ -17,6 +17,7 @@ Class Routes
         Application::$app->router->get('/posts/category', [PostController::class, 'showPosts']);
         Application::$app->router->get('/posts/tag/(any:name)', [PostController::class, 'showPosts']);
         Application::$app->router->get('/posts/tag', [PostController::class, 'showPosts']);
+        Application::$app->router->get('/posts', [PostController::class, 'showPosts']);
         Application::$app->router->get('/post/(any:name)', [PostController::class, 'post']);
         Application::$app->router->get('/create-post', [PostController::class, 'createPost']);
         Application::$app->router->post('/create-post', [PostController::class, 'createPost']);

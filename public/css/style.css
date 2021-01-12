@@ -165,14 +165,11 @@ header.navbar {
 }
 
 
-
-
-
-
-
-
-
-
+/*
+########################################
+Home Page
+########################################
+ */
 
 .home .navbar-links {
     display: flex;
@@ -247,4 +244,59 @@ header.navbar {
 
 .tag-cloud-tag {
     padding: 5px 10px;
+}
+
+/*
+########################################
+Post Listing Page
+########################################
+ */
+
+.posts-page {
+    padding: 20px;
+}
+
+.posts-page header {
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.posts-page-posts {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.posts-page-posts .posts-post {
+    display: flex;
+    padding: 0.5em;
+    width: 48%;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.posts-post > div {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    width: 100%;
+    text-align: center;
+}
+
+.posts-post > div > a {
+    flex: 1 0 auto;
+}
+
+.posts-post > div > img {
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.posts-post > div > div > .btn {
+    margin: 10px;
+}
+
+.posts-post > div > div > .btn:hover {
+    background-color: #E0E0E0;
 }

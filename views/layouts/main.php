@@ -27,6 +27,7 @@ use app\src\Application;
         <div class="nav">
             <div class="navbar-links">
                 <a href="/">Home</a>
+                <a href="/posts">Posts</a>
                 <a href="/categories">Categories</a>
                 <a href="/tags">Tags</a>
                 <a href="#">Subscribe</a>
