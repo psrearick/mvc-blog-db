@@ -2,13 +2,21 @@
 
 namespace app\controllers;
 
-use app\models\CreatePostForm;
+use app\models\Post;
 use app\src\Application;
 use app\src\Controller;
+use app\src\middleware\AuthMiddleware;
 use app\src\Request;
+use app\src\Response;
 
 class BlogController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->registerMiddleware(new AuthMiddleware(['createPost']));
+    }
+
     /**
      * @return string|string[]
      */
@@ -25,16 +33,28 @@ class BlogController extends Controller
      */
     public function createPost(Request $request)
     {
-        $create = new CreatePostForm();
+        $post = new Post();
         if ($request->isPost()) {
-            $create->loadData($request->getBodyData());
-            if ($create->validate() && $create->save()) {
+            $data = $request->getBodyData();
+            $data['user_id'] = Application::$app->user->id;
+            $post->loadData($data);
+            if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post created');
-                return $response->redirect("/post/$create->{$create->primaryKey()}");
+                Application::$app->response->redirect("/post/{$post->primaryKey()}");
+                return true;
             }
         }
         return $this->render('create-post', [
-            'model' => $create
+            'model' => $post
+        ]);
+    }
+
+    public function post(Request $request, Response $response, $id)
+    {
+        $post = new Post();
+        $post->findOne(['id' => (int)$id]);
+        return $this->render('post', [
+            'model' => $post
         ]);
     }
 }

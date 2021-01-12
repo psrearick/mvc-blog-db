@@ -21,13 +21,13 @@ $app = new Application($dir, $config);
 $app->router->get('/', [BlogController::class, 'showPosts']);
 $app->router->get('/create-post', [BlogController::class, 'createPost']);
 $app->router->post('/create-post', [BlogController::class, 'createPost']);
+$app->router->get('/post/(any:name)', [BlogController::class, 'post']);
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
 $app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/profile', [AuthController::class, 'profile']);
-
 
 $app->run();
 

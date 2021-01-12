@@ -46,7 +46,7 @@ abstract class Model
     /**
      * Validation Rules Processing
      */
-    public function validate()
+    public function validate(): bool
     {
         foreach ($this->rules() as $attr => $ruleset) {
             $value = $this->{$attr};

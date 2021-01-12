@@ -40,7 +40,24 @@ abstract class DbModel extends Model
     {
         $table = static::table();
         $data = call_user_func([new DemoData, $table]);
-        $this->loadData($data[0]);
+        $matches = [];
+        foreach ($data as $record) {
+            $match = true;
+            foreach ($cond as $field => $val) {
+                if ($record[$field] !== $val){
+                    $match = false;
+                    break;
+                }
+            }
+            if ($match) {
+                $matches[] = $record;
+            }
+        }
+
+        if (count($matches) > 0) {
+            $this->loadData($matches[0]);
+        }
+
         return $this;
 
 //        $attrs = array_keys($cond);
