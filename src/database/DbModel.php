@@ -4,6 +4,7 @@
 namespace app\src\database;
 
 
+use app\models\User;
 use app\runtime\DemoData;
 use app\src\Model;
 
@@ -36,9 +37,9 @@ abstract class DbModel extends Model
 
     /**
      * @param array $cond
-     * @return object
+     * @return array
      */
-    final public function findOne(array $cond): object
+    final public function findAll(array $cond): array
     {
         $table = static::table();
         $data = call_user_func([new DemoData, $table]);
@@ -55,7 +56,16 @@ abstract class DbModel extends Model
                 $matches[] = $record;
             }
         }
+        return $matches;
+    }
 
+    /**
+     * @param array $cond
+     * @return DbModel
+     */
+    final public function findOne(array $cond): DbModel
+    {
+        $matches = $this->findAll($cond);
         if (count($matches) > 0) {
             $this->loadData($matches[0]);
         }

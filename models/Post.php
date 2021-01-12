@@ -30,7 +30,7 @@ class Post extends DbModel
             'body' => [self::RULE_REQ],
             'excerpt' => [self::RULE_REQ],
             'user_id' => [self::RULE_REQ],
-            'slug' => [self::RULE_REQ]
+            'slug' => [self::RULE_REQ, [self::RULE_UNIQUE, 'class' => self::class]]
         ];
     }
 

@@ -22,6 +22,7 @@ class Application
     public ?Controller $controller = null;
     public User $userClass;
     public View $view;
+    public array $config;
 
     public function __construct(string $root, array $conf)
     {
@@ -32,7 +33,8 @@ class Application
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
         $this->view = new View();
-        $this->userClass = new $conf['userClass'];
+        $this->config = $conf;
+        $this->userClass = new $this->config['userClass'];
         $primaryValue = $this->session->get('user');
         if ($primaryValue) {
             $primaryKey = $this->userClass->primaryKey();

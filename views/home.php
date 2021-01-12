@@ -1,6 +1,12 @@
 <?php
 
-/** @var $this \app\src\View */
+use app\src\View;
+
+/**
+ * @var $this View
+ * @var $posts array
+ */
+
 $this->title = "Home";
 
 ?>
@@ -9,7 +15,7 @@ $this->title = "Home";
 <?php
 
 foreach ($posts as $post) {
-    echo $post . "<br>";
+    echo "<a href='/post/{$post['slug']}'>{$post['post_title']}</a><br>";
 }
 
 ?>

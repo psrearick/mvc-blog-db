@@ -4,16 +4,14 @@
 use app\models\User;
 use app\src\Application;
 use app\src\Routes;
+use app\config\Config;
+
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$config = [
-    // TODO: Here is where we would read the .env to get information such as database credentials
-    'userClass' => User::class,
-    'start_logged_in' => false
-];
-
 $dir = dirname(__DIR__);
+
+$config = (new Config())->getConfig();
 
 $app = new Application($dir, $config);
 
