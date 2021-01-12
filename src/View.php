@@ -13,7 +13,7 @@ class View
      * @param array $params
      * @return string|string[]
      */
-    public function render($view, $params = [])
+    final public function render(string $view, array $params = []): string
     {
         $viewContent = $this->renderView($view, $params);
         $layoutContent = $this->layoutContent();
@@ -25,7 +25,7 @@ class View
      * @return false|string
      * cache and return current layout
      */
-    protected function layoutContent()
+    final private function layoutContent(): string
     {
         $layout = Application::$app->layout;
         if (Application::$app->controller){
@@ -42,7 +42,7 @@ class View
      * @param $params
      * @return false|string
      */
-    protected function renderView($view, $params)
+    final private function renderView(string $view, array $params): string
     {
         foreach ($params as $key => $value) {
             $$key = $value;

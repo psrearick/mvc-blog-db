@@ -92,7 +92,6 @@ class Router
 
                 return false;
             }
-
             return $variables;
         }
 

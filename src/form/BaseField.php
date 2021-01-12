@@ -26,7 +26,7 @@ abstract class BaseField
     abstract public function renderInput(): string;
 
 
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('
             <div class="form-group">

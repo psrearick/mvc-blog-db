@@ -20,24 +20,36 @@ class User extends UserModel
     public ?string $password = null;
     public ?string $passwordConfirmation = null;
 
-    public function table(): string
+    /**
+     * @return string
+     */
+    final public function table(): string
     {
         return 'users';
     }
 
-    public function primaryKey(): string
+    /**
+     * @return string
+     */
+    final public function primaryKey(): string
     {
         return 'id';
     }
 
-    public function save()
+    /**
+     * @return bool
+     */
+    final public function save(): bool
     {
         $this->status = self::STATUS_INACTIVE;
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         return parent::save();
     }
 
-    public function rules(): array
+    /**
+     * @return array[]
+     */
+    final public function rules(): array
     {
         return [
             'name' => [self::RULE_REQ],
@@ -47,12 +59,18 @@ class User extends UserModel
         ];
     }
 
-    public function attributes(): array
+    /**
+     * @return string[]
+     */
+    final public function attributes(): array
     {
         return ['name', 'email', 'password', 'status'];
     }
 
-    public function labels(): array
+    /**
+     * @return string[]
+     */
+    final public function labels(): array
     {
         return [
             'name' => 'Name',
@@ -62,7 +80,10 @@ class User extends UserModel
         ];
     }
 
-    public function getDisplayName(): string
+    /**
+     * @return string
+     */
+    final public function getDisplayName(): string
     {
         return $this->name;
     }

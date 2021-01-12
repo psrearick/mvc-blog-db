@@ -23,7 +23,7 @@ class Application
     public User $userClass;
     public View $view;
 
-    public function __construct($root, array $conf)
+    public function __construct(string $root, array $conf)
     {
         self::$ROOT = $root;
         self::$app = $this;
@@ -42,7 +42,10 @@ class Application
         }
     }
 
-    public static function isGuest()
+    /**
+     * @return bool
+     */
+    public static function isGuest(): bool
     {
         return !self::$app->user;
     }
@@ -50,7 +53,7 @@ class Application
     /**
      *
      */
-    public function run()
+    final public function run(): void
     {
         try {
             echo $this->router->resolve();
@@ -65,7 +68,7 @@ class Application
     /**
      * @return Controller
      */
-    public function getController(): Controller
+    final public function getController(): Controller
     {
         return $this->controller;
     }
@@ -73,7 +76,7 @@ class Application
     /**
      * @param Controller $controller
      */
-    public function setController(Controller $controller): void
+    final public function setController(Controller $controller): void
     {
         $this->controller = $controller;
     }
@@ -82,7 +85,7 @@ class Application
      * @param UserModel $user
      * @return bool
      */
-    public function login(UserModel $user): bool
+    final public function login(UserModel $user): bool
     {
         $this->user = $user;
         $key = $user->primaryKey();
@@ -92,10 +95,12 @@ class Application
     }
 
     /**
+     * @return bool
      */
-    public function logout()
+    final public function logout(): bool
     {
         $this->user = null;
         $this->session->remove('user');
+        return true;
     }
 }

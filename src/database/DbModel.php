@@ -19,8 +19,10 @@ abstract class DbModel extends Model
     /**
      * @return bool
      */
-    public function save()
+    public function save(): bool
     {
+        $record = $this->findOne([]);
+        $this->loadData($record);
         return true;
 
 //        $table = $this->table();
@@ -33,10 +35,10 @@ abstract class DbModel extends Model
     }
 
     /**
-     * @param $cond
-     * @return mixed
+     * @param array $cond
+     * @return object
      */
-    public function findOne($cond)
+    final public function findOne(array $cond): object
     {
         $table = static::table();
         $data = call_user_func([new DemoData, $table]);

@@ -20,7 +20,7 @@ class BlogController extends Controller
     /**
      * @return string|string[]
      */
-    public function showPosts()
+    final public function showPosts(): string
     {
         $params = [
             'posts' => ['Post 1', 'Post 2']];
@@ -31,7 +31,7 @@ class BlogController extends Controller
      * @param Request $request
      * @return string|string[]
      */
-    public function createPost(Request $request)
+    final public function createPost(Request $request): string
     {
         $post = new Post();
         if ($request->isPost()) {
@@ -40,7 +40,7 @@ class BlogController extends Controller
             $post->loadData($data);
             if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post created');
-                Application::$app->response->redirect("/post/{$post->primaryKey()}");
+                Application::$app->response->redirect("/post/{$post->{$post->primaryKey()}}");
                 return true;
             }
         }
@@ -49,7 +49,13 @@ class BlogController extends Controller
         ]);
     }
 
-    public function post(Request $request, Response $response, $id)
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param int $id
+     * @return string
+     */
+    final public function post(Request $request, Response $response, $id): string
     {
         $post = new Post();
         $post->findOne(['id' => (int)$id]);

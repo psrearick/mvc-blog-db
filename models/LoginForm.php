@@ -15,7 +15,7 @@ class LoginForm extends Model
     /**
      * @return array[]
      */
-    public function rules(): array
+    final public function rules(): array
     {
         return [
             'email' => [self::RULE_REQ, self::RULE_EMAIL],
@@ -26,7 +26,7 @@ class LoginForm extends Model
     /**
      * @return string[]
      */
-    public function labels(): array
+    final public function labels(): array
     {
         return [
             'email' => 'Email Address',
@@ -37,7 +37,7 @@ class LoginForm extends Model
     /**
      * @return false|void
      */
-    public function login()
+    final public function login(): bool
     {
         $user = (new User)->findOne(['email' => $this->email]);
         if (!$user->id) {

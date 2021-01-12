@@ -20,7 +20,12 @@ class AuthController extends Controller
         $this->registerMiddleware(new AuthMiddleware(['profile']));
     }
 
-    public function login(Request $request, Response $response)
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return string
+     */
+    final public function login(Request $request, Response $response): string
     {
         $loginForm = new LoginForm();
         if ($request->isPost()) {
@@ -37,7 +42,11 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    /**
+     * @param Request $request
+     * @return string
+     */
+    final public function register(Request $request): string
     {
         $user = new User();
         if ($request->isPost()) {
@@ -63,14 +72,16 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @param Response $response
+     * @return bool
      */
-    public function logout(Request $request, Response $response)
+    final public function logout(Request $request, Response $response): bool
     {
         Application::$app->logout();
         $response->redirect('/');
+        return true;
     }
 
-    public function profile()
+    final public function profile(): string
     {
         return $this->render('profile');
     }

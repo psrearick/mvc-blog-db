@@ -19,7 +19,10 @@ class Post extends DbModel
     public string $excerpt = '';
     public ?int $category_id = null;
 
-    public function rules(): array
+    /**
+     * @return array[]
+     */
+    final public function rules(): array
     {
         return [
             'post_title' => [self::RULE_REQ],
@@ -29,7 +32,10 @@ class Post extends DbModel
         ];
     }
 
-    public function labels(): array
+    /**
+     * @return string[]
+     */
+    final public function labels(): array
     {
         return [
             'post_title' => 'Title',
@@ -42,30 +48,37 @@ class Post extends DbModel
         ];
     }
 
-    public function table(): string
+    /**
+     * @return string
+     */
+    final public function table(): string
     {
         return 'posts';
     }
 
-    public function attributes(): array
+    /**
+     * @return string[]
+     */
+    final public function attributes(): array
     {
         return ['post_title', 'body', 'tags', 'image_url', 'excerpt', 'user_id', 'category_id'];
     }
 
-    public function primaryKey(): string
+    /**
+     * @return string
+     */
+    final public function primaryKey(): string
     {
         return 'id';
     }
 
-    public function getAuthor(): string
+    /**
+     * @return string
+     */
+    final public function getAuthor(): string
     {
         $user = new User();
         $user->findOne(['id' => $this->user_id]);
         return $user->getDisplayName();
-    }
-
-    public function save()
-    {
-        return true;
     }
 }
