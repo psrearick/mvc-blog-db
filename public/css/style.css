@@ -1,0 +1,250 @@
+/*
+########################################
+RESET
+########################################
+ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Set core body defaults */
+body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    background: white;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+    margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+
+
+/*
+########################################
+Utility
+########################################
+ */
+
+.flex {
+    display: flex;
+}
+
+.btn {
+    padding: 20px 40px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.read-more {
+    background-color: #90A4AE;
+}
+
+.read-more:hover {
+    background-color: #B0BEC5;
+    color: black;
+}
+
+/*
+########################################
+MAIN
+########################################
+ */
+
+.container {
+    width: 100%;
+}
+
+a, a:visited {
+    color:black;
+}
+
+a:hover {
+    color: darkred;
+}
+
+header.navbar {
+    top: 0;
+    left: 0;
+    right: 0;
+    max-height: 70px;
+    padding: 20px 48px;
+    margin:0;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgray;
+    position: fixed;
+    background: #ffffff;
+}
+
+.main-content {
+    margin-top: 70px;
+}
+
+.navbar-logo a {
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navbar-links a {
+    padding-left: 30px;
+}
+
+.bottom-bar {
+    justify-content: space-evenly;
+    padding-left: 20px;
+    border-top: 1px solid lightgray;
+}
+
+
+
+
+
+
+
+
+
+
+
+.home .navbar-links {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid lightgray;
+    background: #E0F2F1;
+}
+
+.home .nav .navbar-links a {
+    padding: 25px 0;
+    /*border-right: 1px solid gray;*/
+    width: 100%;
+    text-align: center;
+}
+
+.hero {
+    height: 350px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hero-text {
+    padding: 40px;
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.hero .read-more {
+    margin-top: 20px;
+}
+
+.blog {
+    padding-left: 20px;
+    margin: 20px;
+    flex-basis: 66.66%;
+}
+
+.blog article {
+    border-bottom: 1px solid lightgray;
+    padding: 20px;
+}
+
+.homePost .title {
+    padding: 20px 5px;
+}
+
+.homePost img {
+    margin: 0 auto;
+}
+
+.flex-right {
+    flex-basis: 33.33%;
+    margin: 20px;
+}
+
+.recent-posts {
+    background: #DCEDC8;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tag-cloud {
+    background-color: #E0E0E0;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tag-cloud-tag {
+    padding: 5px 10px;
+}

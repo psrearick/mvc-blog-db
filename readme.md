@@ -1,6 +1,6 @@
 # Blog
 
-## Design Decision
+## Design Decisions
 
 ### MVC Pattern
 I am using the MVC organizational pattern to avoid duplication of code and facilitate a clean, logical structure with a separation of concerns. This also adds flexibility and extensibility to the system.

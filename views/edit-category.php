@@ -5,7 +5,7 @@
 
 use app\src\form\Form;
 
-$this->title = 'Edit Category';
+$this->title = 'Edit Category - ' . $model->category;
 
 ?>
 

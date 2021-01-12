@@ -8,19 +8,35 @@ use app\src\Application;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <script src="../../public/js/main.js"></script>
+
     <title><?php echo $this->title ?></title>
 </head>
 
-<div>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/categories">Categories</a></li>
-        <li><a href="/tags">Tags</a></li>
-    </ul>
-</div>
+<!--<div class="container">-->
 
+    <header class="navbar flex">
 
-<div>
+        <div class="site-title navbar-link navbar-logo">
+            <a href="/" >
+                <?php echo \app\src\Application::$app->config['site_name'] ?>
+            </a>
+        </div>
+
+        <div class="nav">
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/categories">Categories</a>
+                <a href="/tags">Tags</a>
+                <a href="#">Subscribe</a>
+            </div>
+        </div>
+
+    </header>
+<!--</div>-->
+
+<div class="main-content">
     <div>
         <?php if (Application::$app->session->getMessage('success')): ?>
             <div>
@@ -28,20 +44,22 @@ use app\src\Application;
             </div>
         <?php endif; ?>
     </div>
-    {{content}}
+
+    <div>
+        {{content}}
+    </div>
+
+    <div class="nav flex bottom-bar">
+        <a href="/">Home</a>
+        <?php if (Application::isGuest()): ?>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <?php else: ?>
+            <a href="/create-post">Create Post</a>
+            <a href="/profile">Profile</a>
+            Logged in as <?php echo Application::$app->user->getDisplayName() ?>  <a href="/logout">(Logout)</a>
+        <?php endif ?>
+    </div>
 </div>
 
-<div>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <?php if (Application::isGuest()): ?>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-        <?php else: ?>
-            <li><a href="/create-post">Create Post</a></li>
-            <a href="/profile">Profile</a>
-            <li>Logged in as <?php echo Application::$app->user->getDisplayName() ?>  <a href="/logout">(Logout)</a> </li>
-        <?php endif ?>
-    </ul>
-</div>
 </html>

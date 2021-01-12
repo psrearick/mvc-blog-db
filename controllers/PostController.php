@@ -49,10 +49,15 @@ class PostController extends Controller
         }
 
         $posts = $post->findAll($cond);
-
-        $params['posts'] = $posts;
+        $params['posts'] = array_slice($posts,0,10);
 
         if (empty($req[1])){
+            $categories = $this->getCategorySelect();
+            $topCategories = array_slice($categories, 0, 5);
+            $params['categories'] = $categories;
+            $params['topCategories'] = $topCategories;
+            $tags = $this->getTagSelect();
+            $params['tags'] = $tags;
             return $this->render('home', $params);
         } else {
             return $this->render('posts', $params);

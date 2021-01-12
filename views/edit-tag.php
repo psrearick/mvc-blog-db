@@ -5,7 +5,7 @@
 
 use app\src\form\Form;
 
-$this->title = 'Edit Tag';
+$this->title = 'Edit Tag - ' . $model->tagName;
 
 ?>
 
