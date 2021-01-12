@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Post;
+use app\models\Tag;
 use app\src\Application;
 use app\src\Controller;
 use app\src\exception\ForbiddenException;
@@ -10,7 +12,7 @@ use app\src\middleware\AuthMiddleware;
 use app\src\Request;
 use app\src\Response;
 
-class BlogController extends Controller
+class PostController extends Controller
 {
 
     public function __construct()
@@ -19,15 +21,42 @@ class BlogController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Response $response
+     * @param array $identifier
      * @return string|string[]
      */
-    final public function showPosts(): string
+    final public function showPosts(Request $request, Response $response, array $identifier = []): string
     {
         $post = new Post();
-        $params = [
-            'posts' => $post->findAll([])
-        ];
-        return $this->render('home', $params);
+        $cond = [];
+        $params = [];
+        $req = explode('/', $request->getPath());
+        if (count($req) === 4) {
+            $type = $req[2];
+            $params['type'] = $type;
+            $identifier = $identifier['name'];
+            $params['condition'] = $identifier;
+            if ($type === 'category') {
+                $category = new Category();
+                $category->findOne(['category' => $identifier]);
+                $cond = ['category_id' => $category->id];
+            } else {
+                $tag = new Tag();
+                $tag->findOne(['tagName' => $identifier]);
+                $cond = [['tags' => $tag->id, 'operator' => 'in']];
+            }
+        }
+
+        $posts = $post->findAll($cond);
+
+        $params['posts'] = $posts;
+
+        if (empty($req[1])){
+            return $this->render('home', $params);
+        } else {
+            return $this->render('posts', $params);
+        }
     }
 
     /**
@@ -41,20 +70,52 @@ class BlogController extends Controller
             $data = $request->getBodyData();
             $data['user_id'] = Application::$app->user->id;
             $post->loadData($data);
-            $post->validate();
             if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post created');
                 Application::$app->response->redirect("/post/{$post->slug}");
                 return true;
             }
         }
+
         return $this->render('create-post', [
-            'model' => $post
+            'model' => $post,
+            'categories' => $this->getCategorySelect(),
+            'tags' => $this->getTagSelect()
         ]);
     }
 
     /**
+     * @return array
+     */
+    final public function getCategorySelect()
+    {
+        $category = new Category();
+        $categoryArrays = $category->findAll([]);
+        $categories = [];
+        foreach ($categoryArrays as $categoryArray) {
+            $categories[] = ['id' => $categoryArray['id'], 'value' => $categoryArray['category']];
+        }
+        return $categories;
+    }
+
+    /**
+     * @return array
+     */
+    final public function getTagSelect()
+    {
+        $tag = new Tag();
+        $tagArrays = $tag->findAll([]);
+        $tags = [];
+        foreach ($tagArrays as $tagArray) {
+            $tags[] = ['id' => $tagArray['id'], 'value' => $tagArray['tagName']];
+        }
+        return $tags;
+    }
+
+    /**
      * @param Request $request
+     * @param Response $response
+     * @param array $slug
      * @return string
      * @throws ForbiddenException
      */
@@ -69,7 +130,6 @@ class BlogController extends Controller
         }
         if ($request->isPost()) {
             $post->loadData($data);
-            $post->validate();
             if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post modified');
                 Application::$app->response->redirect("/post/{$post->slug}");
@@ -77,7 +137,9 @@ class BlogController extends Controller
             }
         }
         return $this->render('edit-post', [
-            'model' => $post
+            'model' => $post,
+            'categories' => $this->getCategorySelect(),
+            'tags' => $this->getTagSelect()
         ]);
     }
 
@@ -92,7 +154,7 @@ class BlogController extends Controller
         $post = new Post();
         $post->findOne(['slug' => $slug['name']]);
         return $this->render('post', [
-            'model' => $post
+            'model' => $post,
         ]);
     }
 }

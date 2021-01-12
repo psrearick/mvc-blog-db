@@ -9,6 +9,7 @@ use app\src\database\DbModel;
 class Category extends DbModel
 {
     public string $category = '';
+    public ?int $id = null;
 
     final public function table(): string
     {
@@ -28,7 +29,7 @@ class Category extends DbModel
     final public function rules(): array
     {
         return [
-            'category' => [self::RULE_REQ],
+            'category' => [self::RULE_REQ, [self::RULE_UNIQUE, 'class' => self::class]],
         ];
     }
 }

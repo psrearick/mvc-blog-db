@@ -13,7 +13,8 @@ $this->title = $model->post_title;
 
 <div>
     <span>
-        <?php echo $model->category_id ?>
+        <a href="/posts/category/<?php echo $model->category->category ?>"><?php echo $model->category->category ?></a>
+
     </span>
 </div>
 
@@ -24,7 +25,15 @@ $this->title = $model->post_title;
 
 <div>
     <span>
-        tags: <?php echo $model->tags ?>
+        tags:
+        <br>
+        <?php
+            foreach ($model->tags_array as $tag) {
+                ?>
+                    <a href="/posts/tag/<?php echo $tag->tagName ?>"><?php echo $tag->tagName ?></a><br>
+                <?php
+            }
+        ?>
     </span>
 </div>
 

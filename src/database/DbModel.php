@@ -39,7 +39,7 @@ abstract class DbModel extends Model
      * @param array $cond
      * @return array
      */
-    final public function findAll(array $cond): array
+    public function findAll(array $cond): array
     {
         $table = static::table();
         $data = call_user_func([new DemoData, $table]);
@@ -47,9 +47,32 @@ abstract class DbModel extends Model
         foreach ($data as $record) {
             $match = true;
             foreach ($cond as $field => $val) {
-                if ($record[$field] !== $val){
-                    $match = false;
-                    break;
+                if (!is_array($val)){
+                    if (!array_key_exists($field, $record)){
+                        continue;
+                    }
+                    if ($record[$field] !== $val){
+                        $match = false;
+                        break;
+                    }
+                    continue;
+                }
+                foreach ($val as $key => $value) {
+                    if (!array_key_exists($key, $record)){
+                        continue;
+                    }
+                    if (array_key_exists('operator', $cond[0]) && $val['operator'] === 'in') {
+                        if (!in_array($value, $record[$key])){
+                            $match = false;
+                            break;
+                        } else {
+                            continue;
+                        }
+                    }
+                    if ($record[$key] !== $value){
+                        $match = false;
+                        break;
+                    }
                 }
             }
             if ($match) {

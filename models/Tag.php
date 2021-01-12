@@ -9,6 +9,7 @@ use app\src\database\DbModel;
 class Tag extends DbModel
 {
     public string $tagName = '';
+    public ?int $id = null;
 
     /**
      * @return string
@@ -23,7 +24,7 @@ class Tag extends DbModel
      */
     final public function attributes(): array
     {
-        return ['tag-name'];
+        return ['tagName'];
     }
 
     /**
@@ -40,7 +41,7 @@ class Tag extends DbModel
     final public function rules(): array
     {
         return [
-            'tag-name' => [self::RULE_REQ],
+            'tagName' => [self::RULE_REQ, [self::RULE_UNIQUE, 'class' => self::class]],
         ];
     }
 }

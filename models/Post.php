@@ -13,12 +13,14 @@ class Post extends DbModel
     public ?int $id = null;
     public string $post_title = '';
     public string $body = '';
-    public string $tags = '';
+    public array $tags = [];
     public string $image_url = '';
     public ?int $user_id = null;
     public string $excerpt = '';
     public string $slug = '';
     public ?int $category_id = null;
+    public array $tags_array = [];
+    public ?Category $category = null;
 
     /**
      * @return array[]
@@ -83,5 +85,28 @@ class Post extends DbModel
         $user = new User();
         $user->findOne(['id' => $this->user_id]);
         return $user->getDisplayName();
+    }
+
+    final public function findAll(array $cond): array
+    {
+        $matches = parent::findAll($cond);
+        $posts = [];
+        foreach ($matches as $post) {
+
+            $category = new Category();
+            $category->findOne(['id' => $post['category_id']]);
+
+            $postTags = [];
+            foreach ($post['tags'] as $tagItem) {
+                $tag = new Tag();
+                $tag->findOne(['id' => $tagItem]);
+                $postTags[] = $tag;
+            }
+
+            $post['category'] = $category;
+            $post['tags_array'] = $postTags;
+            $posts[] = $post;
+        }
+        return $posts;
     }
 }

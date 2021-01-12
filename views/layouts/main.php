@@ -14,7 +14,8 @@ use app\src\Application;
 <div>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/create-post">Create Post</a></li>
+        <li><a href="/categories">Categories</a></li>
+        <li><a href="/tags">Tags</a></li>
     </ul>
 </div>
 
