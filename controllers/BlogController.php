@@ -52,13 +52,13 @@ class BlogController extends Controller
     /**
      * @param Request $request
      * @param Response $response
-     * @param int $id
+     * @param array $slug
      * @return string
      */
-    final public function post(Request $request, Response $response, $id): string
+    final public function post(Request $request, Response $response, array $slug): string
     {
         $post = new Post();
-        $post->findOne(['id' => (int)$id]);
+        $post->findOne(['slug' => $slug['name']]);
         return $this->render('post', [
             'model' => $post
         ]);

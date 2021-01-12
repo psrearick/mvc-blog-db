@@ -13,6 +13,7 @@ $this->title = 'Create Post';
 
 <?php $form = Form::begin('', 'post') ?>
     <?php echo $form->field($model, 'post_title') ?>
+    <?php echo $form->field($model, 'slug') ?>
     <?php echo (new TextareaField($model, 'body'))->__toString() ?>
     <?php echo (new TextareaField($model, 'excerpt'))->__toString() ?>
     <?php echo $form->field($model, 'tags') ?>

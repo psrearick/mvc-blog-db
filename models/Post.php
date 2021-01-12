@@ -17,6 +17,7 @@ class Post extends DbModel
     public string $image_url = '';
     public ?int $user_id = null;
     public string $excerpt = '';
+    public string $slug = '';
     public ?int $category_id = null;
 
     /**
@@ -29,6 +30,7 @@ class Post extends DbModel
             'body' => [self::RULE_REQ],
             'excerpt' => [self::RULE_REQ],
             'user_id' => [self::RULE_REQ],
+            'slug' => [self::RULE_REQ]
         ];
     }
 
@@ -44,7 +46,8 @@ class Post extends DbModel
             'image_url' => 'Image URL',
             'excerpt' => 'Excerpt',
             'user_id' => 'User',
-            'category_id' => 'Category'
+            'category_id' => 'Category',
+            'slug' => 'Slug'
         ];
     }
 
@@ -61,7 +64,7 @@ class Post extends DbModel
      */
     final public function attributes(): array
     {
-        return ['post_title', 'body', 'tags', 'image_url', 'excerpt', 'user_id', 'category_id'];
+        return ['post_title', 'body', 'tags', 'image_url', 'excerpt', 'user_id', 'category_id', 'slug'];
     }
 
     /**

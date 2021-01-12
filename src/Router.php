@@ -13,7 +13,7 @@ class Router
     public Request $request;
     public Response $response;
     protected array $routes = [];
-    protected array $wild_cards = ['int' => '/^[0-9]+$/', 'any' => '/^[0-9A-Za-z]+$/'];
+    protected array $wild_cards = ['int' => '/^[0-9]+$/', 'any' => '/^[0-9A-Za-z_-]+$/'];
 
     /**
      * Router constructor.
@@ -92,6 +92,7 @@ class Router
 
                 return false;
             }
+
             return $variables;
         }
 
