@@ -38,13 +38,11 @@ use app\src\Application;
 <!--</div>-->
 
 <div class="main-content">
-    <div>
         <?php if (Application::$app->session->getMessage('success')): ?>
-            <div>
-               <?php echo Application::$app->session->getMessage('success') ?>
+            <div class="status-message">
+                <span><?php echo Application::$app->session->getMessage('success') ?></span>
             </div>
         <?php endif; ?>
-    </div>
 
     <div>
         {{content}}

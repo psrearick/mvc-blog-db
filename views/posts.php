@@ -14,16 +14,18 @@ $this->title = "Posts";
 
 ?>
 
-<div class="posts-page">
-    <header class="flex">
+<div class="page">
+    <header class="flex space-between">
         <div>
             <h1>Posts</h1>
         </div>
         <div>
-            <?php if (!empty($type) && !Application::isGuest()) { ?>
-                <h3><?php echo ucfirst($type) ?>: <?php echo $condition ?></h3>
-                <a href="/edit-<?php echo $type?>/<?php echo $condition ?>">Edit <?php echo $type ?></a><br>
-            <?php } ?>
+            <?php if(!empty($type)) {
+                echo "<h3>" . ucfirst($type) . ": " . $condition . "</h3>";
+                if (!Application::isGuest()) {
+                    echo "<a href='/edit-$type/$condition'>Edit " . ucfirst($type) . "</a>";
+                }
+            } ?>
         </div>
     </header>
 

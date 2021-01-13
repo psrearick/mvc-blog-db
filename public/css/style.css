@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 /*
 ########################################
 RESET
@@ -9,6 +11,10 @@ RESET
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
 }
 
 /* Remove default padding */
@@ -23,6 +29,8 @@ h1,
 h2,
 h3,
 h4,
+h5,
+h6
 p,
 ul[class],
 ol[class],
@@ -33,6 +41,17 @@ blockquote,
 dl,
 dd {
     margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 
 /* Set core body defaults */
@@ -93,16 +112,47 @@ Utility
 ########################################
  */
 
+
+
+a, a:visited {
+    color:black;
+}
+
+a:hover {
+    color: darkred;
+}
 .flex {
     display: flex;
 }
 
 .btn {
-    padding: 20px 40px;
+    padding: 15px 40px;
     border: 1px solid lightgray;
     border-radius: 8px;
     text-decoration: none;
     display: inline-block;
+}
+
+.btn-success {
+    background-color: #1976D2;
+    color: #EEEEEE !important;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.btn-success:hover {
+    background-color: #1565C0;
+}
+
+.btn-cancel {
+     background-color: #424242;
+    color: #BDBDBD !important;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.btn-cancel:hover {
+    background-color: #212121;
 }
 
 .read-more {
@@ -114,6 +164,63 @@ Utility
     color: black;
 }
 
+.space-between {
+    justify-content: space-between;
+}
+
+.page {
+    padding: 20px;
+}
+
+.page header {
+    padding: 0 40px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.form-container {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #ECEFF1;
+    box-shadow: 0 0 10px 0.25em #B0BEC5;
+    /*padding: 20px 20px 0;*/
+    flex-direction: column;
+}
+
+.form-container header {
+    padding-top: 20px;
+}
+
+.form-container form {
+    /*margin: 0 auto;*/
+    width: 100%;
+}
+
+.form-container select,
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    border: none;
+    padding: 5px;
+}
+
+.control-buttons {
+    justify-content: space-between;
+}
+
+.control-buttons .control-btn {
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 15px;
+}
+
+.form-container .fields {
+    padding: 40px;
+}
+
 /*
 ########################################
 MAIN
@@ -122,14 +229,6 @@ MAIN
 
 .container {
     width: 100%;
-}
-
-a, a:visited {
-    color:black;
-}
-
-a:hover {
-    color: darkred;
 }
 
 header.navbar {
@@ -152,6 +251,7 @@ header.navbar {
 .navbar-logo a {
     text-decoration: none;
     font-size: 1.5rem;
+    color: darkred;
 }
 
 .navbar-links a {
@@ -162,6 +262,24 @@ header.navbar {
     justify-content: space-evenly;
     padding-left: 20px;
     border-top: 1px solid lightgray;
+}
+
+.status-message {
+    text-align: center;
+    padding: 10px;
+}
+
+.status-message > span {
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #A5D6A7;
+    border: 1px solid #2E7D32;
+}
+
+.invalid-feedback {
+    color: red;
+    padding: 0 0 10px;
 }
 
 
@@ -252,15 +370,6 @@ Post Listing Page
 ########################################
  */
 
-.posts-page {
-    padding: 20px;
-}
-
-.posts-page header {
-    justify-content: space-between;
-    padding: 0 40px;
-}
-
 .posts-page-posts {
     display: flex;
     justify-content: space-between;
@@ -299,4 +408,51 @@ Post Listing Page
 
 .posts-post > div > div > .btn:hover {
     background-color: #E0E0E0;
+}
+
+/*
+########################################
+Categories/Tags Listing Page
+########################################
+ */
+
+.inner-page {
+    padding: 40px;
+}
+
+.create-category-page {
+    padding: 40px;
+}
+
+.create-category-page form {
+    /*padding: 40px;*/
+    /*border: 1px solid lightgray;*/
+    /*display: inline-block;*/
+    /*box-shadow: 2px 2px 2px black;*/
+}
+
+.create-category-page form label {
+    display: block;
+    text-transform:  uppercase;
+    font-weight: bold;
+    color: gray;
+    font-size: 0.75em;
+    padding-bottom:0.5em;
+}
+
+.create-category-page form .btn {
+    background-color: #4DD0E1;
+}
+
+.create-category-page form .btn:hover {
+    background-color: #00838F;
+    color: lightgray;
+}
+
+.create-category-page .btn-success {
+    text-align: left;
+}
+
+.create-category-page .btn-cancel {
+    text-align: right;
 }

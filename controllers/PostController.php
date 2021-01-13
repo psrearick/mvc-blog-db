@@ -30,7 +30,14 @@ class PostController extends Controller
     {
         $post = new Post();
         $cond = [];
-        $params = [];
+        $params = [
+            'type' => '',
+            'condition' => '',
+            'posts' => [],
+            'categories' => [],
+            'topCategories' => [],
+            'tags' => []
+        ];
         $req = explode('/', $request->getPath());
         if (count($req) === 4) {
             $type = $req[2];
@@ -74,6 +81,7 @@ class PostController extends Controller
         if ($request->isPost()) {
             $data = $request->getBodyData();
             $data['user_id'] = Application::$app->user->id;
+            $data['tags'] = explode(',', $data['tags']);
             $post->loadData($data);
             if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post created');
@@ -134,6 +142,7 @@ class PostController extends Controller
             throw new ForbiddenException();
         }
         if ($request->isPost()) {
+            $data['tags'] = explode(',', $data['tags']);
             $post->loadData($data);
             if ($post->validate() && $post->save()) {
                 Application::$app->session->setMessage('success', 'Blog post modified');

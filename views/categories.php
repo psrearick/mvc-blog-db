@@ -10,20 +10,32 @@ $this->title = 'Categories';
 
 ?>
 
-<h3>All Categories</h3>
+<div class="page">
+    <header>
+        <div>
+            <h1>All Categories</h1>
+        </div>
+    </header>
 
-<div>
-    <ul>
-        <?php
+    <div class="inner-page">
+        <div>
+            <?php
             foreach ($categories as $category) {
-        ?>
-                <li><a href="/posts/category/<?php echo $category['category'] ?>"><?php echo $category['category'] ?></a></li>
-        <?php
+            ?>
+                <span><a href="/posts/category/<?php echo $category['category'] ?>"><?php echo $category['category'] ?></a></span><br>
+            <?php
             }
-        ?>
-    </ul>
+            ?>
+        </div>
+        <div class="mt-20">
+            <?php
+            if (!Application::isGuest()) {
+                echo "<div><a href='/create-category'>Create Category</a></div>";
+            }
+            ?>
+        </div>
+    </div>
+
 </div>
 
-<div>
-    <a href="/create-category">Create Category</a>
-</div>
+

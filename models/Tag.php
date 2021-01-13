@@ -44,4 +44,11 @@ class Tag extends DbModel
             'tagName' => [self::RULE_REQ, [self::RULE_UNIQUE, 'class' => self::class]],
         ];
     }
+
+    final public function labels(): array
+    {
+        return [
+            'tagName' => 'Tag'
+        ];
+    }
 }

@@ -87,6 +87,10 @@ class Post extends DbModel
         return $user->getDisplayName();
     }
 
+    /**
+     * @param array $cond
+     * @return array
+     */
     final public function findAll(array $cond): array
     {
         $matches = parent::findAll($cond);
@@ -109,4 +113,30 @@ class Post extends DbModel
         }
         return $posts;
     }
+
+
+// Potentially have tags be a text field and add new tags or find existing on save
+//
+//    /**
+//     * @return bool
+//     */
+//    final public function save(): bool
+//    {
+//        $tags = $this->tags;
+//        $tagArray = [];
+//        foreach ($tags as $tag) {
+//            $tagModel = new Tag();
+//            $tagModel->findOne(['tagName' => $tag]);
+//            if (!$tagModel->id) {
+//                $tagModel->loadData([
+//                    'tagName' => $tag
+//                ]);
+//                $tagModel->save();
+//            }
+//            $tagArray[] = $tagModel->id;
+//        }
+//        $this->tags = $tagArray;
+//        return parent::save();
+//    }
+
 }
