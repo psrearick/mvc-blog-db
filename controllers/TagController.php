@@ -21,7 +21,7 @@ class TagController extends Controller
     /**
      * @return string|string[]
      */
-    final public function showTags()
+    final public function showTags(): string
     {
         $tag = new Tag();
         $params = [
@@ -58,7 +58,7 @@ class TagController extends Controller
      * @param array $tagName
      * @return bool|string|string[]
      */
-    final public function editTag(Request $request, Response $response, array $tagName)
+    final public function editTag(Request $request, Response $response, array $tagName): string
     {
         $name= $tagName['name'];
         $tag = new Tag();

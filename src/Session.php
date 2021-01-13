@@ -23,7 +23,7 @@ class Session
      * @param $key
      * @param $message
      */
-    public function setMessage($key, $message)
+    final public function setMessage($key, $message): void
     {
         $_SESSION[self::MESSAGE_KEY][$key] = [
             'remove' => false,
@@ -35,7 +35,7 @@ class Session
      * @param $key
      * @return false|mixed
      */
-    public function getMessage($key)
+    final public function getMessage($key)
     {
         return $_SESSION[self::MESSAGE_KEY][$key]['value'] ?? false;
     }
@@ -46,7 +46,7 @@ class Session
      * @param string $key
      * @param $value
      */
-    public function set(string $key, $value)
+    final public function set(string $key, $value): void
     {
         $_SESSION[$key] = $value;
     }
@@ -57,12 +57,12 @@ class Session
      * @param string $key
      * @return false|mixed
      */
-    public function get(string $key)
+    final public function get(string $key)
     {
         return $_SESSION[$key] ?? false;
     }
 
-    public function remove($key)
+    final public function remove($key): void
     {
         unset($_SESSION[$key]);
     }

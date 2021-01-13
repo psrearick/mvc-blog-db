@@ -19,17 +19,17 @@ class Controller
     /**
      * @param $layout
      */
-    public function setLayout($layout)
+    final public function setLayout($layout): void
     {
         $this->layout = $layout;
     }
 
-    public function render($view, $params = [])
+    final public function render(string $view, $params = []): string
     {
         return Application::$app->view->render($view, $params);
     }
 
-    public function registerMiddleware(Middleware $middleware)
+    final public function registerMiddleware(Middleware $middleware): void
     {
         $this->middleware[] = $middleware;
     }
@@ -37,7 +37,7 @@ class Controller
     /**
      * @return Middleware[]
      */
-    public function getMiddleware(): array
+    final public function getMiddleware(): array
     {
         return $this->middleware;
     }

@@ -23,7 +23,7 @@ class Request
      *
      * @return string
      */
-    public function getBasePath(): string
+    final public function getBasePath(): string
     {
         return $this->base_path;
     }
@@ -34,7 +34,7 @@ class Request
      *
      * @return string
      */
-    public function path(): string
+    final public function path(): string
     {
         $path = $_SERVER['REQUEST_URI'] ?? '/';
         $pos = strpos($path, '?');
@@ -49,7 +49,7 @@ class Request
      *
      * @return string
      */
-    public function getPath(): string
+    final public function getPath(): string
     {
         return $this->path;
     }
@@ -59,7 +59,7 @@ class Request
      *
      * @return string
      */
-    public function method(): string
+    final public function method(): string
     {
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 
@@ -75,7 +75,7 @@ class Request
      *
      * @return string
      */
-    public function getMethod(): string
+    final public function getMethod(): string
     {
         return $this->method;
     }
@@ -83,7 +83,7 @@ class Request
     /**
      * @return bool
      */
-    public function isGet(): bool
+    final public function isGet(): bool
     {
         return $this->method === 'get';
     }
@@ -91,7 +91,7 @@ class Request
     /**
      * @return bool
      */
-    public function isPost(): bool
+    final public function isPost(): bool
     {
         return $this->method === 'post';
     }
@@ -101,7 +101,7 @@ class Request
      *
      * @return array
      */
-    public function getBodyData(): array
+    final public function getBodyData(): array
     {
         $body = [];
 

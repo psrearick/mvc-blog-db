@@ -58,7 +58,7 @@ class CategoryController extends Controller
      * @param array $category
      * @return bool|string|string[]
      */
-    final public function editCategory(Request $request, Response $response, array $category)
+    final public function editCategory(Request $request, Response $response, array $category): string
     {
         $name = $category['name'];
         $category = new Category();

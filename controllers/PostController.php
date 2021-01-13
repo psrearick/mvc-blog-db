@@ -100,7 +100,7 @@ class PostController extends Controller
     /**
      * @return array
      */
-    final public function getCategorySelect()
+    final public function getCategorySelect(): array
     {
         $category = new Category();
         $categoryArrays = $category->findAll([]);
@@ -114,7 +114,7 @@ class PostController extends Controller
     /**
      * @return array
      */
-    final public function getTagSelect()
+    final public function getTagSelect(): array
     {
         $tag = new Tag();
         $tagArrays = $tag->findAll([]);

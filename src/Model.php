@@ -17,7 +17,7 @@ abstract class Model
     /**
      * @param $data
      */
-    public function loadData($data)
+    final public function loadData($data): void
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
@@ -36,7 +36,7 @@ abstract class Model
         return [];
     }
 
-    public function getLabel($attribute)
+    final public function getLabel(string $attribute): string
     {
         return $this->labels()[$attribute] ?? $attribute;
     }
@@ -46,7 +46,7 @@ abstract class Model
     /**
      * Validation Rules Processing
      */
-    public function validate(): bool
+    final public function validate(): bool
     {
         foreach ($this->rules() as $attr => $ruleset) {
             $value = $this->{$attr};
@@ -104,7 +104,7 @@ abstract class Model
      * @param string $rule
      * @param array $params
      */
-    private function addErrorForRule(string $attr, string $rule, $params = [])
+    private function addErrorForRule(string $attr, string $rule, array $params = []): void
     {
         $msg = $this->errorMessages()[$rule] ?? '';
         foreach ($params as $key => $value) {
@@ -113,11 +113,19 @@ abstract class Model
         $this->errors[$attr][] = $msg;
     }
 
-    public function addError(string $attr, string $msg) {
+    /**
+     * @param string $attr
+     * @param string $msg
+     */
+    final public function addError(string $attr, string $msg): void
+    {
         $this->errors[$attr][] = $msg;
     }
 
-    public function errorMessages()
+    /**
+     * @return string[]
+     */
+    final public function errorMessages(): array
     {
         return [
             self::RULE_REQ => 'This field is required',
@@ -130,12 +138,20 @@ abstract class Model
         ];
     }
 
-    public function hasError($attr)
+    /**
+     * @param string $attr
+     * @return bool
+     */
+    final public function hasError(string $attr): bool
     {
         return $this->errors[$attr] ?? false;
     }
 
-    public function getFirstError($attr)
+    /**
+     * @param string $attr
+     * @return false|mixed
+     */
+    final public function getFirstError(string $attr)
     {
         return $this->errors[$attr][0] ?? false;
     }
