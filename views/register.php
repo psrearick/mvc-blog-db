@@ -6,17 +6,26 @@ use app\src\form\Form;
 $this->title = 'Register';
 ?>
 
-<div>
-    <h1>Register</h1>
-</div>
 
-<div>
-    <?php $form = Form::begin('', 'post') ?>
-        <?php echo $form->field($model, 'name') ?>
-        <?php echo $form->field($model, 'email') ?>
-        <?php echo $form->field($model, 'password')->passwordField() ?>
-        <?php echo $form->field($model, 'passwordConfirmation')->passwordField() ?>
-        <button>Register</button>
-        <a href="/"><button type="button">Cancel</button></a>
-    <?php Form::end() ?>
+<div class="page create-category-page">
+    <div class="form-container flex">
+        <header>
+            <div>
+                <h1>Register</h1>
+            </div>
+        </header>
+
+        <?php $form = Form::begin('', 'post') ?>
+        <div class="fields">
+            <?php echo $form->field($model, 'name') ?>
+            <?php echo $form->field($model, 'email') ?>
+            <?php echo $form->field($model, 'password')->passwordField() ?>
+            <?php echo $form->field($model, 'passwordConfirmation')->passwordField() ?>
+        </div>
+        <div class="control-buttons flex">
+            <button class="control-btn btn-success" type="submit">Register</button>
+            <a href="/" class="control-btn btn-cancel">Cancel</a>
+        </div>
+        <?php Form::end() ?>
+    </div>
 </div>

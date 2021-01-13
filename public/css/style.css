@@ -412,7 +412,7 @@ Post Listing Page
 
 /*
 ########################################
-Categories/Tags Listing Page
+form pages
 ########################################
  */
 
@@ -455,4 +455,40 @@ Categories/Tags Listing Page
 
 .create-category-page .btn-cancel {
     text-align: right;
+}
+
+/*
+########################################
+Post Page
+########################################
+ */
+
+.post-page .hero img {
+    margin: 0 auto;
+}
+
+.post-page .post {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.post-page .post-body {
+    padding-left: 20px;
+    margin: 20px;
+    flex-basis: 66.66%;
+}
+
+.post-page .post-details {
+    flex-direction: column;
+}
+
+.post-page .post-details > div {
+    margin-bottom: 40px;
+}
+
+.post-page .edit-post {
+    padding: 20px 0;
+}
+.post-page .edit-post a {
+    color: gray;
 }

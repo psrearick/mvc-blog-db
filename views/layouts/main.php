@@ -14,6 +14,7 @@ use app\src\Application;
     <title><?php echo $this->title ?></title>
 </head>
 
+<body>
 <!--<div class="container">-->
 
     <header class="navbar flex">
@@ -60,5 +61,5 @@ use app\src\Application;
         <?php endif ?>
     </div>
 </div>
-
+</body>
 </html>
