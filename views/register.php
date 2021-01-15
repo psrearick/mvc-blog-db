@@ -7,7 +7,7 @@ $this->title = 'Register';
 ?>
 
 
-<div class="page create-category-page">
+<div class="page create-page">
     <div class="form-container flex">
         <header>
             <div>

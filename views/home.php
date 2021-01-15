@@ -7,9 +7,6 @@ use app\src\View;
  */
 
 $this->title = "Home";
-
 ?>
 
-
 <h1>Home</h1>
-

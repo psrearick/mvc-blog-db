@@ -6,7 +6,7 @@ use app\src\form\Form;
 
 $this->title = "Log in";
 ?>
-<div class="page create-category-page">
+<div class="page create-page">
     <div class="form-container flex">
         <header>
             <div>

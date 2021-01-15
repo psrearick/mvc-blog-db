@@ -5,7 +5,6 @@ namespace app\src\database;
 
 
 use app\models\User;
-use app\runtime\DemoData;
 use app\src\Application;
 use app\src\Model;
 
@@ -45,44 +44,55 @@ abstract class DbModel extends Model
     public function findAll(array $cond): array
     {
         $table = static::table();
-        $data = call_user_func([new DemoData, $table]);
-        $matches = [];
-        foreach ($data as $record) {
-            $match = true;
-            foreach ($cond as $field => $val) {
-                if (!is_array($val)){
-                    if (!array_key_exists($field, $record)){
-                        continue;
-                    }
-                    if ($record[$field] !== $val){
-                        $match = false;
-                        break;
-                    }
+        $sqlWhere = [];
+        $params = [];
+        $inParams = [];
+        foreach ($cond as $field => $val) {
+            if (!is_array($val)){
+                if (!property_exists($this, $field)){
                     continue;
                 }
-                foreach ($val as $key => $value) {
-                    if (!array_key_exists($key, $record)){
-                        continue;
-                    }
-                    if (array_key_exists('operator', $cond[0]) && $val['operator'] === 'in') {
-                        if (!in_array($value, $record[$key])){
-                            $match = false;
-                            break;
-                        } else {
-                            continue;
-                        }
-                    }
-                    if ($record[$key] !== $value){
-                        $match = false;
-                        break;
-                    }
-                }
+                $sqlWhere[] = "$field = :$field";
+                $params[$field] = $val;
+                continue;
             }
-            if ($match) {
-                $matches[] = $record;
+            foreach ($val as $key => $value) {
+                if (!property_exists($this, $key)){
+                    continue;
+                }
+                if (array_key_exists('operator', $cond[0]) && $val['operator'] === 'in') {
+                    $i = 0;
+                    $in = "";
+                    foreach ($value as $item) {
+                        $k = ":$key".$i++;
+                        $in .= "$k,";
+                        $inParams[$k] = $item;
+                    }
+                    $in = rtrim($in,",");
+                    $sqlWhere[] = "$key IN ($in)";
+                    continue;
+                }
+                if (array_key_exists('operator', $cond[0]) && $val['operator'] === 'like') {
+                    $sqlWhere[] = "$key LIKE :$key";
+                    $params[$key] = "%$value%";
+                    continue;
+                }
+                $sqlWhere[] = "$key = :$key";
+                $params[$key] = $value;
             }
         }
-        return $matches;
+        $params = array_merge($params,$inParams);
+        $sql = "SELECT * FROM $table";
+        if (!empty($params)) {
+            $sql .= " WHERE " . implode(" AND ", $sqlWhere);
+        }
+        $statement = self::prepare($sql);
+        foreach ($params as $param => $val) {
+            $statement->bindValue($param, $val);
+        }
+
+        $statement->execute();
+        return $statement->fetchAll();
     }
 
     /**

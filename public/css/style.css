@@ -303,135 +303,17 @@ Home Page
     text-align: center;
 }
 
-.hero {
-    height: 350px;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.hero-text {
-    padding: 40px;
-    width: 1200px;
-    text-align: left;
-    margin: 0 auto;
-}
-
-.hero .read-more {
-    margin-top: 20px;
-}
-
-.blog {
-    padding-left: 20px;
-    margin: 20px;
-    flex-basis: 66.66%;
-}
-
-.blog article {
-    border-bottom: 1px solid lightgray;
-    padding: 20px;
-}
-
-.homePost .title {
-    padding: 20px 5px;
-}
-
-.homePost img {
-    margin: 0 auto;
-}
-
-.flex-right {
-    flex-basis: 33.33%;
-    margin: 20px;
-}
-
-.recent-posts {
-    background: #DCEDC8;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.tag-cloud {
-    background-color: #E0E0E0;
-    margin-top: 40px;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.tag-cloud-tag {
-    padding: 5px 10px;
-}
-
-/*
-########################################
-Post Listing Page
-########################################
- */
-
-.posts-page-posts {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.posts-page-posts .posts-post {
-    display: flex;
-    padding: 0.5em;
-    width: 48%;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    margin: 20px 0;
-}
-
-.posts-post > div {
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    width: 100%;
-    text-align: center;
-}
-
-.posts-post > div > a {
-    flex: 1 0 auto;
-}
-
-.posts-post > div > img {
-    margin: 0 auto;
-    padding: 10px 0;
-}
-
-.posts-post > div > div > .btn {
-    margin: 10px;
-}
-
-.posts-post > div > div > .btn:hover {
-    background-color: #E0E0E0;
-}
-
 /*
 ########################################
 form pages
 ########################################
  */
 
-.inner-page {
+.create-page {
     padding: 40px;
 }
 
-.create-category-page {
-    padding: 40px;
-}
-
-.create-category-page form {
-    /*padding: 40px;*/
-    /*border: 1px solid lightgray;*/
-    /*display: inline-block;*/
-    /*box-shadow: 2px 2px 2px black;*/
-}
-
-.create-category-page form label {
+.create-page form label {
     display: block;
     text-transform:  uppercase;
     font-weight: bold;
@@ -440,55 +322,19 @@ form pages
     padding-bottom:0.5em;
 }
 
-.create-category-page form .btn {
+.create-page form .btn {
     background-color: #4DD0E1;
 }
 
-.create-category-page form .btn:hover {
+.create-page form .btn:hover {
     background-color: #00838F;
     color: lightgray;
 }
 
-.create-category-page .btn-success {
+.create-page .btn-success {
     text-align: left;
 }
 
-.create-category-page .btn-cancel {
+.create-page .btn-cancel {
     text-align: right;
-}
-
-/*
-########################################
-Post Page
-########################################
- */
-
-.post-page .hero img {
-    margin: 0 auto;
-}
-
-.post-page .post {
-    max-width: 960px;
-    margin: 0 auto;
-}
-
-.post-page .post-body {
-    padding-left: 20px;
-    margin: 20px;
-    flex-basis: 66.66%;
-}
-
-.post-page .post-details {
-    flex-direction: column;
-}
-
-.post-page .post-details > div {
-    margin-bottom: 40px;
-}
-
-.post-page .edit-post {
-    padding: 20px 0;
-}
-.post-page .edit-post a {
-    color: gray;
 }
