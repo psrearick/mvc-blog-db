@@ -12,7 +12,11 @@ $this->title = 'Profile';
     </header>
 
     <div>
-        <?php echo $model->name ?>
+        <?php echo $model->firstname ?>
+    </div>
+
+    <div>
+        <?php echo $model->lastname ?>
     </div>
 
     <div>

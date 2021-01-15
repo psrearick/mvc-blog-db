@@ -1,6 +1,7 @@
-# Blog
-
 ## Design Decisions
+Some of my design decisions for this project are listed below.
+
+This project is a very basic MVC from with integrated Authentication. It can be used as the base of any basic application. It is only for demo purposes and is not production-ready.
 
 ### MVC Pattern
 I am using the MVC organizational pattern to avoid duplication of code and facilitate a clean, logical structure with a separation of concerns. This also adds flexibility and extensibility to the system.
@@ -17,17 +18,13 @@ Utilizes namespaces as outlined in the PSR-4 standard. PSR-4 autoloading enables
 
 I set up routing based on url parameters to make it easy to add new routes. Each route can be configured to allow for a callback so that they can be processed differently. The routing is also designed to accept wildcards.
 
-### Data
-
-To avoid configuring a database, demo data is stored in the `runtime` directory. The database queries are partially constructed, then `TODOS` are written to explain roughly how the query would be run on the database and what should be returned.
-
 ### Views
 
 Views utilize templates to avoid duplicating code. There is also a Response controller to handle HTTP responses.
 
-### Create Post Form
+### Forms
 
-The post data is sanitized in the `Request` class in case invalid characters are submitted in the form.
+The form data is sanitized in the `Request` class in case invalid characters are submitted in the form.
 
 ### Models
 
@@ -43,19 +40,8 @@ There is basic server-side form validation. The error messages are added when th
 
 ### Protected Routes
 
-Only autenticated users can access certain pages, such as the Create Post page.
+Only authenticated users can access certain pages, such as the Profile page.
 
 ### Middleware
 
 I am using a simple middleware pattern so more middlewares can be added as needed instead of being stuck with one strategy of a million `if-else`s.
-
-### Authentication
-
-For demo purposes, in `public/index.php`, within the `config` array, the value for `start_logged_in` determines if a user is logged in by default or not. If this is set to `true`, you will not be able to log out, but will not need to log in. If it is set to `false`, you will need to log in. Just get the credentials from the demo data.
-
-### Creating Items
-As there is no database setup, new records cannot be created. After a form validates, it just redirects the user to an existing record.
-
-### Front End Styling
-
-The is very minimal frontend styling, again to give options down-the-road.

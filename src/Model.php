@@ -19,6 +19,9 @@ abstract class Model
      */
     final public function loadData($data): void
     {
+        if (!$data) {
+            return;
+        }
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
@@ -82,14 +85,12 @@ abstract class Model
                     $class = $rule['class'];
                     $uniqueAttr = $rule['attribute'] ?? $attr;
                     $table = $class::table();
-                    $statement = "SELECT * FROM $table WHERE $uniqueAttr = :attr";
+                    $statement = Application::$app->db->prepare("SELECT * FROM $table WHERE $uniqueAttr = :attr");
+                    $statement->bindValue(":attr", $value);
+                    $statement->execute();
 
-                    // TODO: prepare statement and bind attribute to value
-                    //      execute statement
-                    //      fetch results and sets to variable $record
-                    //      if results exists, throw an error
 
-                    $record = null; // demo value, TODO: Get this value from query result
+                    $record = $statement->fetchObject();
                     if ($record) {
                         $this->addErrorForRule($attr, self::RULE_UNIQUE, ['field' => $this->getLabel($attr)]);
                     }
@@ -134,6 +135,7 @@ abstract class Model
             self::RULE_MAX => 'This field must be no more that {max} characters',
             self::RULE_MATCH => 'This field must match {match}',
             self::RULE_UNIQUE => 'Record with this {field} already exists',
+            self::RULE_UNIQUE => 'Record with this {field} already exists'
 
         ];
     }
@@ -142,7 +144,7 @@ abstract class Model
      * @param string $attr
      * @return bool
      */
-    final public function hasError(string $attr): bool
+    final public function hasError(string $attr)
     {
         return $this->errors[$attr] ?? false;
     }

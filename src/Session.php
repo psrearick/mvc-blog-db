@@ -59,6 +59,7 @@ class Session
      */
     final public function get(string $key)
     {
+
         return $_SESSION[$key] ?? false;
     }
 

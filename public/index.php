@@ -5,9 +5,11 @@ use app\models\User;
 use app\src\Application;
 use app\src\Routes;
 use app\config\Config;
-
+use Dotenv\Dotenv;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 $dir = dirname(__DIR__);
 
@@ -19,7 +21,3 @@ Routes::setRoutes();
 
 $app->run();
 
-// DEMO
-if ($config['start_logged_in']) {
-    $app->login((new User)->findOne([]));
-}

@@ -28,10 +28,6 @@ use app\src\Application;
         <div class="nav">
             <div class="navbar-links">
                 <a href="/">Home</a>
-                <a href="/posts">Posts</a>
-                <a href="/categories">Categories</a>
-                <a href="/tags">Tags</a>
-                <a href="#">Subscribe</a>
             </div>
         </div>
 
@@ -55,7 +51,6 @@ use app\src\Application;
         <a href="/login">Login</a>
         <a href="/register">Register</a>
         <?php else: ?>
-            <a href="/create-post">Create Post</a>
             <a href="/profile">Profile</a>
             Logged in as <?php echo Application::$app->user->getDisplayName() ?>  <a href="/logout">(Logout)</a>
         <?php endif ?>

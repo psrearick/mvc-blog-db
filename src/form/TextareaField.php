@@ -13,6 +13,5 @@ class TextareaField extends BaseField
             $this->model->hasError($this->attribute) ? ' is-invalid' : '',
             $this->model->{$this->attribute},
         );
-        // TODO: Implement renderInput() method.
     }
 }

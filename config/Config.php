@@ -11,11 +11,15 @@ class Config
      */
     final public function getConfig(): array
     {
-        // TODO: Here is where we would read the .env to get information such as database credentials
+        $userClass = "app\models\\" . $_ENV['USERCLASS'];
         return [
-            'userClass' => User::class,
-            'start_logged_in' => false,
-            'site_name' => 'PSRearick Blog'
+            'db' => [
+                'dsn' => $_ENV['DB_DSN'],
+                'user' => $_ENV['DB_USER'],
+                'password' => $_ENV['DB_PASSWORD'],
+            ],
+            'userClass' => new $userClass(),
+            'site_name' => $_ENV['SITE_NAME']
         ];
     }
 }

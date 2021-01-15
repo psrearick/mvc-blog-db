@@ -1,5 +1,5 @@
 {
-    "name": "philliprearick/cms",
+    "name": "philliprearick/mvc-core",
     "authors": [
         {
             "name": "philliprearick",
@@ -11,5 +11,8 @@
             "app\\": "./"
         }
     },
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.2",
+      "ext-pdo": "*"
+    }
 }

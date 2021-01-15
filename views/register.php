@@ -17,7 +17,8 @@ $this->title = 'Register';
 
         <?php $form = Form::begin('', 'post') ?>
         <div class="fields">
-            <?php echo $form->field($model, 'name') ?>
+            <?php echo $form->field($model, 'firstname') ?>
+            <?php echo $form->field($model, 'lastname') ?>
             <?php echo $form->field($model, 'email') ?>
             <?php echo $form->field($model, 'password')->passwordField() ?>
             <?php echo $form->field($model, 'passwordConfirmation')->passwordField() ?>

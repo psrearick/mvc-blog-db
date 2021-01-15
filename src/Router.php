@@ -126,7 +126,6 @@ class Router
         if ($callback === false) {
             throw new NotFoundException();
         }
-
         if (is_string($callback)){
             return Application::$app->view->render($callback);
         }

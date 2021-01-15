@@ -14,7 +14,8 @@ class User extends UserModel
     const STATUS_DELETED = 2;
 
     public ?int $id = null;
-    public ?string $name = null;
+    public ?string $firstname = null;
+    public ?string $lastname = null;
     public ?string $email = null;
     public int $status = self::STATUS_INACTIVE;
     public ?string $password = null;
@@ -52,7 +53,8 @@ class User extends UserModel
     final public function rules(): array
     {
         return [
-            'name' => [self::RULE_REQ],
+            'firstname' => [self::RULE_REQ],
+            'lastname' => [self::RULE_REQ],
             'email' => [self::RULE_EMAIL, self::RULE_REQ, [self::RULE_UNIQUE, 'class' => self::class]],
             'password' => [self::RULE_REQ, [self::RULE_MIN, 'min' => 6]],
             'passwordConfirmation' => [self::RULE_REQ, [self::RULE_MATCH, 'match' => 'password']],
@@ -64,7 +66,7 @@ class User extends UserModel
      */
     final public function attributes(): array
     {
-        return ['name', 'email', 'password', 'status'];
+        return ['firstname', 'lastname', 'email', 'password', 'status'];
     }
 
     /**
@@ -73,7 +75,8 @@ class User extends UserModel
     final public function labels(): array
     {
         return [
-            'name' => 'Name',
+            'firstname' => 'First Name',
+            'lastname' => 'Last Name',
             'email' => 'Email Address',
             'password' => 'Password',
             'passwordConfirmation' => 'Confirm Password'
@@ -85,6 +88,6 @@ class User extends UserModel
      */
     final public function getDisplayName(): string
     {
-        return $this->name;
+        return $this->firstname;
     }
 }

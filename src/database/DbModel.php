@@ -6,6 +6,7 @@ namespace app\src\database;
 
 use app\models\User;
 use app\runtime\DemoData;
+use app\src\Application;
 use app\src\Model;
 
 abstract class DbModel extends Model
@@ -22,17 +23,19 @@ abstract class DbModel extends Model
      */
     public function save(): bool
     {
-        $record = $this->findOne([]);
-        $this->loadData($record);
+        $table = $this->table();
+        $attributes = $this->attributes();
+        $params = array_map(fn($attr) => ":$attr", $attributes);
+        $statement = self::prepare(
+            "INSERT INTO $table (" . implode(',', $attributes) . ") 
+            VALUES (" . implode(',', $params) . ")"
+        );
+        foreach ($attributes as $attribute) {
+            $statement->bindValue(":$attribute", $this->{$attribute});
+        }
+        $statement->execute();
+
         return true;
-
-//        $table = $this->table();
-//        $attributes = $this->attributes();
-//        $params = array_map(fn($attr) => ":$attr", $attributes);
-//        $statement = "INSERT INTO $table (".implode(',', $attributes).") VALUES (".implode(',', $params).")";
-
-        // TODO: prepare pdo statement $statement and bind values to attributes
-
     }
 
     /**
@@ -86,22 +89,26 @@ abstract class DbModel extends Model
      * @param array $cond
      * @return DbModel
      */
-    final public function findOne(array $cond): DbModel
+    final public function findOne(array $cond)
     {
-        $matches = $this->findAll($cond);
-        if (count($matches) > 0) {
-            $this->loadData($matches[0]);
+        $table = $this->table();
+        $attributes  = array_keys($cond);
+        $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+        $statement = self::prepare("SELECT * FROM $table WHERE $sql");
+        foreach ($cond as $key => $item) {
+            $statement->bindValue(":$key", $item);
         }
-
+        $statement->execute();
+        $data = $statement->fetchObject();
+        if ($data) {
+            $this->loadData($data);
+        }
         return $this;
+    }
 
-//        $attrs = array_keys($cond);
-//        $sql = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attrs));
-//        $statement = "SELECT * FROM $table WHERE $SQL";
-        // TODO: prepare pdo statement $statement and bind values to attributes
-        //  Execute $statement and fetch results
-        //  Return first record
-
+    public static function prepare(string $sql): object
+    {
+        return Application::$app->db->pdo->prepare($sql);
     }
 
 }

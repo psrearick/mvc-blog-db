@@ -61,10 +61,12 @@ class Request
      */
     final public function method(): string
     {
-        $method = strtolower($_SERVER['REQUEST_METHOD']);
+        if (array_key_exists('REQUEST_METHOD', $_SERVER)) {
+            $method = strtolower($_SERVER['REQUEST_METHOD']);
 
-        if (in_array($method, $this->http_methods)) {
-            return $method;
+            if (in_array($method, $this->http_methods)) {
+                return $method;
+            }
         }
 
         return 'get';

@@ -51,8 +51,7 @@ class AuthController extends Controller
         $user = new User();
         if ($request->isPost()) {
             $user->loadData($request->getBodyData());
-            $valid = $user->validate();
-            if ($valid && $user->save()) {
+            if ($user->validate() && $user->save()) {
                 Application::$app->session->setMessage('success', 'You have been registered');
                 Application::$app->response->redirect('/');
                 return true;

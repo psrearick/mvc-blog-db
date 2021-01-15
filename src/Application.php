@@ -3,6 +3,7 @@
 namespace app\src;
 
 use app\models\User;
+use app\src\database\Database;
 
 /**
  * Class Application
@@ -17,6 +18,7 @@ class Application
     public Request $request;
     public Response $response;
     public Session $session;
+    public Database $db;
     public ?UserModel $user = null;
     public static Application $app;
     public ?Controller $controller = null;
@@ -34,8 +36,10 @@ class Application
         $this->router = new Router($this->request, $this->response);
         $this->view = new View();
         $this->config = $conf;
+        $this->db = new Database($conf);
         $this->userClass = new $this->config['userClass'];
         $primaryValue = $this->session->get('user');
+
         if ($primaryValue) {
             $primaryKey = $this->userClass->primaryKey();
             $this->user = $this->userClass->findOne([$primaryKey => $primaryValue]);
