@@ -15,24 +15,22 @@ use core\Application;
 </head>
 
 <body>
-<!--<div class="container">-->
 
-    <header class="navbar flex">
+<header class="navbar flex">
 
-        <div class="site-title navbar-link navbar-logo">
-            <a href="/" >
-                <?php echo Application::$app->config['site_name'] ?>
-            </a>
+    <div class="site-title navbar-link navbar-logo">
+        <a href="/" >
+            <?php echo Application::$app->config['site_name'] ?>
+        </a>
+    </div>
+
+    <div class="nav">
+        <div class="navbar-links">
+            <a href="/">Home</a>
         </div>
+    </div>
 
-        <div class="nav">
-            <div class="navbar-links">
-                <a href="/">Home</a>
-            </div>
-        </div>
-
-    </header>
-<!--</div>-->
+</header>
 
 <div class="main-content">
         <?php if (Application::$app->session->getMessage('success')): ?>

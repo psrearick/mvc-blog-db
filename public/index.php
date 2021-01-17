@@ -2,8 +2,8 @@
 
 
 use app\models\User;
-use app\src\Application;
-use app\src\Routes;
+use core\Application;
+use app\config\Routes;
 use app\config\Config;
 use Dotenv\Dotenv;
 
