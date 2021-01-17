@@ -4,7 +4,9 @@
 namespace app\models;
 
 
-class Category extends \app\src\database\DbModel
+use core\database\DbModel;
+
+class Category extends DbModel
 {
     public string $category = '';
     public ?int $id = null;
@@ -34,7 +36,7 @@ class Category extends \app\src\database\DbModel
     }
 
     /**
-     * @inheritDoc
+     * @return array[]
      */
     final public function rules(): array
     {
@@ -43,6 +45,9 @@ class Category extends \app\src\database\DbModel
         ];
     }
 
+    /**
+     * @return string[]
+     */
     final public function labels(): array
     {
         return [

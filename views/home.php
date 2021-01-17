@@ -1,6 +1,6 @@
 <?php
 
-use app\src\View;
+use core\View;
 
 /**
  * @var $this View

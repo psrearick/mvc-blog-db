@@ -2,7 +2,7 @@
 /** @var $model User */
 
 use app\models\User;
-use app\src\form\Form;
+use core\form\Form;
 
 $this->title = "Log in";
 ?>

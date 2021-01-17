@@ -4,7 +4,9 @@
 namespace app\models;
 
 
-class Tag extends \app\src\database\DbModel
+use core\database\DbModel;
+
+class Tag extends DbModel
 {
     /**
      * @return string

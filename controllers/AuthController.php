@@ -6,11 +6,11 @@ namespace app\controllers;
 
 use app\models\LoginForm;
 use app\models\User;
-use app\src\Application;
-use app\src\Controller;
-use app\src\middleware\AuthMiddleware;
-use app\src\Request;
-use app\src\Response;
+use core\Application;
+use core\Controller;
+use core\middleware\AuthMiddleware;
+use core\Request;
+use core\Response;
 
 class AuthController extends Controller
 {

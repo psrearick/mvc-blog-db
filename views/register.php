@@ -1,7 +1,8 @@
 <?php
-/** @var $model \app\models\User */
+/** @var $model User */
 
-use app\src\form\Form;
+use core\form\Form;
+use app\models\User;
 
 $this->title = 'Register';
 ?>

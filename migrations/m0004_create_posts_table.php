@@ -2,7 +2,7 @@
 
 namespace app\migrations;
 
-use app\src\Application;
+use core\Application;
 
 class m0004_create_posts_table {
 

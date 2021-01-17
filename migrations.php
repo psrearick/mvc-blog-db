@@ -1,7 +1,7 @@
 <?php
 
 use app\config\Config;
-use app\src\Application;
+use core\Application;
 use Dotenv\Dotenv;
 
 require_once __DIR__.'/vendor/autoload.php';

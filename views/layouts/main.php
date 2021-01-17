@@ -1,5 +1,5 @@
 <?php
-use app\src\Application;
+use core\Application;
 ?>
 
 <!doctype html>
@@ -21,7 +21,7 @@ use app\src\Application;
 
         <div class="site-title navbar-link navbar-logo">
             <a href="/" >
-                <?php echo \app\src\Application::$app->config['site_name'] ?>
+                <?php echo Application::$app->config['site_name'] ?>
             </a>
         </div>
 

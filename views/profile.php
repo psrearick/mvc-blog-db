@@ -1,7 +1,11 @@
 <?php
 
 /** @var $model Post */
-/** @var $this \app\src\View */
+/** @var $this View */
+
+use app\models\Post;
+use core\View;
+
 $this->title = 'Profile';
 
 ?>

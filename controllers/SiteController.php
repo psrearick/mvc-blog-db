@@ -4,13 +4,17 @@
 namespace app\controllers;
 
 
-use app\models\User;
-use app\src\Controller;
+use core\Controller;
 
 class SiteController extends Controller
 {
-public function showHome() {
-    return $this->render('home');
-}
+
+    /**
+     * @return string
+     */
+    final public function showHome(): string
+    {
+        return $this->render('home');
+    }
 
 }

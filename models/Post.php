@@ -4,8 +4,7 @@
 namespace app\models;
 
 
-use app\src\database\DbModel;
-use app\src\Model;
+use core\database\DbModel;
 
 class Post extends DbModel
 {

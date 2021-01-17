@@ -2,8 +2,6 @@
 
 namespace app\config;
 
-use app\models\User;
-
 class Config
 {
     /**

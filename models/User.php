@@ -4,8 +4,7 @@
 namespace app\models;
 
 
-use app\src\Model;
-use app\src\UserModel;
+use core\UserModel;
 
 class User extends UserModel
 {
